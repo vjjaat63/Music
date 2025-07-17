@@ -1,0 +1,91 @@
+/* Music */
+*{
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --bg : white;
+    --col : black;
+    --top : pink;
+    --shadow : 0 8px 16px black
+
+}
+body{
+    background-color: var(--bg);
+    color: var(--col);
+}
+#container{
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--top);
+    border: 2px solid var(--bg);
+    border-radius: 15px;
+}
+input,button{
+    border-radius: 7px;
+    padding: 5px;
+    color: var(--col);
+    border: 1px solid white;
+    padding: 4px;
+    margin: 4px;
+    color: var(--col);
+    background-color: var(--bg);
+}
+button{
+    background-color: aqua;
+    color: var(--bg)
+}
+#result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+}
+#dm{
+    height: 30px;
+    cursor: pointer;
+}
+.song {
+    width: 280px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 20px;
+}
+  
+.song:hover {
+        transform: scale(1.05);
+        transition : transform 0.1s ease-out
+}
+  
+.image {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+  
+.song p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+    color: var(--col);
+}
+  
+.audio audio {
+    width: 95%;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+}
+
+  
