@@ -48,15 +48,18 @@ let handledata = (data)=>{
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
         <p class = 'release_date'> Release Date : ${releaseDate} </p>
         <button id = "${button_id}"> Lyrics </button>
-        <div class='outer_box>
-        <p class="lyrics">${lyrics}</p>
-        </div>
         `
-
+ 
         
         result.insertAdjacentElement('beforeend',details);
     });
-}
+
+
+document.getElementById(button_id).addEventListemer('click',()=>{
+   details.innerHTML +=' div class='outer_box>
+        <p class="lyrics">${lyrics}</p>
+        </div>'
+});
 
 
 async function fetching(api) {
