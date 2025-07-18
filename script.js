@@ -44,22 +44,17 @@ let handledata = (data) => {
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
         <p class = 'release_date'> Release Date : ${releaseDate} </p>
-        <button id = "lyrics-button-${button_id}"> Lyrics </button>
-        `;
-
+        <button id = "${button_id}"> Lyrics </button>
+        `
         result.insertAdjacentElement('beforeend', details);
 
-        // Get the button *after* it's been added to the DOM within this loop iteration
-        const lyricsButton = document.getElementById(`lyrics-button-${button_id}`); 
-
-        // Attach the event listener directly to the button within this loop iteration
-        lyricsButton.addEventListener('click', () => {
+        document.getElementById(button_id).addEventListener('click', () => {
             const lyricsContainer = document.createElement('div');
             lyricsContainer.className = 'outer_box';
             lyricsContainer.innerHTML = `<p class="lyrics">${lyrics}</p>`;
             details.appendChild(lyricsContainer);
-            lyricsButton.style.display = 'none'; // Optional: Hide the button after showing lyrics
-        });
+         
+   
     });
 }
 
