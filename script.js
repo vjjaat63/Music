@@ -19,13 +19,17 @@ let handledata = (data)=>{
     data.forEach(song => {
         let details = document.createElement('div')
         details.className = 'song';
-        console.log(song)
+        // console.log(song)
         const album = song.album;
         const thumbnail = song.image;        
         const audio = song.media_url;
         const artists = song.singers;
         const name = song.song;
-        const lyrics = song.lyrics;
+        const button_id = song.label_id;
+        let lyrics = song.lyrics;
+        // console.log(lyrics);
+        if(song.lyrics === null)
+                lyrics = "not available";
         const duration ={
             minutes : Math.floor(parseInt(song.duration)/60) ,
             seconds : Math.floor(parseInt(song.duration)%60)
@@ -42,7 +46,12 @@ let handledata = (data)=>{
         <p class = 'singer'> Singer : ${artists} </p>
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
-        <p class = 'totalplays'> Release Date : ${releaseDate} </p>`
+        <p class = 'release_date'> Release Date : ${releaseDate} </p>
+        <button id = "${button_id}"> Lyrics </button>
+        <div class='outer_box>
+        <p class="lyrics">${lyrics}</p>
+        </div>
+        `
 
         
         result.insertAdjacentElement('beforeend',details);
