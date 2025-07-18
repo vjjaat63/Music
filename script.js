@@ -19,7 +19,7 @@ let handledata = (data)=>{
     data.forEach(song => {
         let details = document.createElement('div')
         details.className = 'song';
-        // console.log(song)
+        console.log(song)
         const album = song.album;
         const thumbnail = song.image;        
         const audio = song.media_url;
@@ -42,7 +42,7 @@ let handledata = (data)=>{
         <p class = 'singer'> Singer : ${artists} </p>
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
-        <p class = 'totalplays'> Release Date : ${releaseDate} </p>
+        <p class = 'totalplays'> Release Date : ${releaseDate} </p>`
 
         
         result.insertAdjacentElement('beforeend',details);
