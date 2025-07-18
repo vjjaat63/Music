@@ -24,6 +24,8 @@ let handledata = (data)=>{
         const thumbnail = song.image;        
         const audio = song.media_url;
         const artists = song.singers;
+        const name = song.song;
+        const lyrics = song.lyrics;
         const duration ={
             minutes : Math.floor(parseInt(song.duration)/60) ,
             seconds : Math.floor(parseInt(song.duration)%60)
@@ -34,12 +36,14 @@ let handledata = (data)=>{
 
         details.innerHTML = `<img src = ${thumbnail} alt = "thumbnail" class = "image">
         <p class = 'audio'> <audio src = ${audio} controls >click</audio> </p>
-        <p class = 'duration'> Duration : ${duration.minutes}:${duration.seconds} </p>
+        <p class = 'name'> Song : ${name}</p>
         <p class = 'album'> Album : ${album}</p>
+        <p class = 'duration'> Duration : ${duration.minutes}:${duration.seconds} </p>
         <p class = 'singer'> Singer : ${artists} </p>
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
-        <p class = 'totalplays'> Release Date : ${releaseDate} </p> `
+        <p class = 'totalplays'> Release Date : ${releaseDate} </p>
+
         
         result.insertAdjacentElement('beforeend',details);
     });
