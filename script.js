@@ -25,11 +25,11 @@ let handledata = (data)=>{
         const audio = song.media_url;
         const artists = song.singers;
         const name = song.song;
-        const button_id = song.label_id;
         let lyrics = song.lyrics;
         // console.log(lyrics);
         if(song.lyrics === null)
                 lyrics = "not available";
+
         const duration ={
             minutes : Math.floor(parseInt(song.duration)/60) ,
             seconds : Math.floor(parseInt(song.duration)%60)
@@ -47,14 +47,24 @@ let handledata = (data)=>{
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
         <p class = 'release_date'> Release Date : ${releaseDate} </p>
-        <button id = "${button_id}"> Lyrics </button>
-        <div class='outer_box>
-        <p class="lyrics">${lyrics}</p>
-        </div>
         `
+        const button = document.createElement('button');
+        button.textContent = "Lyrics";
+        button.className = "lyrics-btn";
+        details.appendChild(button);
 
-        
-        result.insertAdjacentElement('beforeend',details);
+        result.insertAdjacentElement('beforeend', details);
+
+        // add event listener to the individual button
+        button.addEventListener('click', () => {
+            if (!details.querySelector('.lyrics')) {
+                const outerBox = document.createElement('div');
+                outerBox.className = 'outer_box';
+                outerBox.innerHTML = `<p class="lyrics">${lyrics}</p>`;
+                details.appendChild(outerBox);
+            }
+        });
+
     });
 }
 
