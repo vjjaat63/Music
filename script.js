@@ -4,35 +4,32 @@ const btn = document.getElementById('search');
 const container = document.getElementById('container');
 const dm = document.getElementById('dm');
 
-let handledata = (data)=>{
-    
+let handledata = (data) => {
     const oldResult = document.getElementById('result');
-    if (oldResult) 
+    if (oldResult)
         oldResult.remove();
-    
+
     const result = document.createElement('div');
     result.id = 'result'
     container.appendChild(result);
-    
-    
-    
+
     data.forEach(song => {
-        let details = document.createElement('div')
+        let details = document.createElement('div');
         details.className = 'song';
         // console.log(song)
         const album = song.album;
-        const thumbnail = song.image;        
+        const thumbnail = song.image;
         const audio = song.media_url;
         const artists = song.singers;
         const name = song.song;
-        const button_id = song.label_id;
+        const button_id = song.label_id; // Unique ID for each button
         let lyrics = song.lyrics;
         // console.log(lyrics);
-        if(song.lyrics === null)
-                lyrics = "not available";
-        const duration ={
-            minutes : Math.floor(parseInt(song.duration)/60) ,
-            seconds : Math.floor(parseInt(song.duration)%60)
+        if (song.lyrics === null)
+            lyrics = "not available";
+        const duration = {
+            minutes: Math.floor(parseInt(song.duration) / 60),
+            seconds: Math.floor(parseInt(song.duration) % 60)
         }
         const music = song.music;
         const totalplays = song.play_count;
@@ -47,12 +44,25 @@ let handledata = (data)=>{
         <p class = 'music'> Music By : ${music} </p>
         <p class = 'totalplays'> Total Plays : ${totalplays} </p>
         <p class = 'release_date'> Release Date : ${releaseDate} </p>
-        <button id = "${button_id}"> Lyrics </button>
-        `
- 
-        
-        result.insertAdjacentElement('beforeend',details);
+        <button id = "lyrics-button-${button_id}"> Lyrics </button>
+        `;
+
+        result.insertAdjacentElement('beforeend', details);
+
+        // Get the button *after* it's been added to the DOM within this loop iteration
+        const lyricsButton = document.getElementById(`lyrics-button-${button_id}`); 
+
+        // Attach the event listener directly to the button within this loop iteration
+        lyricsButton.addEventListener('click', () => {
+            const lyricsContainer = document.createElement('div');
+            lyricsContainer.className = 'outer_box';
+            lyricsContainer.innerHTML = `<p class="lyrics">${lyrics}</p>`;
+            details.appendChild(lyricsContainer);
+            lyricsButton.style.display = 'none'; // Optional: Hide the button after showing lyrics
+        });
     });
+}
+
 
 
 document.getElementById(button_id).addEventListemer('click',()=>{
