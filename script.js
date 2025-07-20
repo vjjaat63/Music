@@ -1,61 +1,72 @@
 // music
 const input = document.getElementById('input');
 const btn = document.getElementById('search');
-const container = document.getElementById('container');
+const resultContainer = document.getElementById('result');
 const dm = document.getElementById('dm');
+const toggleThemeBtn = document.getElementById('toggle-theme');
 
-let handledata = (data)=>{
-    
-    const oldResult = document.getElementById('result');
-    if (oldResult) 
-        oldResult.remove();
-    
-    const result = document.createElement('div');
-    result.id = 'result'
-    container.appendChild(result);
-    
-    
-    
+// Theme toggle logic
+function setTheme(isDark) {
+    if (isDark) {
+        document.body.classList.add('dark');
+    } else {
+        document.body.classList.remove('dark');
+    }
+    localStorage.setItem('music-theme', isDark ? 'dark' : 'light');
+}
+
+// Load saved theme
+(function() {
+    const saved = localStorage.getItem('music-theme');
+    if (saved === 'dark') setTheme(true);
+})();
+
+toggleThemeBtn && toggleThemeBtn.addEventListener('click', function() {
+    const isDark = !document.body.classList.contains('dark');
+    setTheme(isDark);
+});
+
+let handledata = (data) => {
+    // Clear previous results
+    resultContainer.innerHTML = '';
+
     data.forEach(song => {
-        let details = document.createElement('div')
+        let details = document.createElement('div');
         details.className = 'song';
-        // console.log(song)
         const album = song.album;
-        const thumbnail = song.image;        
+        const thumbnail = song.image;
         const audio = song.media_url;
         const artists = song.singers;
         const name = song.song;
         let lyrics = song.lyrics;
-        // console.log(lyrics);
         if(song.lyrics === null)
-                lyrics = "not available";
+            lyrics = "not available";
 
-        const duration ={
-            minutes : Math.floor(parseInt(song.duration)/60) ,
-            seconds : Math.floor(parseInt(song.duration)%60)
+        const duration = {
+            minutes: Math.floor(parseInt(song.duration) / 60),
+            seconds: Math.floor(parseInt(song.duration) % 60)
         }
         const music = song.music;
         const totalplays = song.play_count;
         const releaseDate = song.release_date;
 
-        details.innerHTML = `<img src = ${thumbnail} alt = "thumbnail" class = "image">
-        <p class = 'audio'> <audio src = ${audio} controls >click</audio> </p>
-        <p class = 'name'> Song : ${name}</p>
-        <p class = 'album'> Album : ${album}</p>
-        <p class = 'duration'> Duration : ${duration.minutes}:${duration.seconds} </p>
-        <p class = 'singer'> Singer : ${artists} </p>
-        <p class = 'music'> Music By : ${music} </p>
-        <p class = 'totalplays'> Total Plays : ${totalplays} </p>
-        <p class = 'release_date'> Release Date : ${releaseDate} </p>
-        `
+        details.innerHTML = `<img src="${thumbnail}" alt="thumbnail" class="image">
+        <p class='audio'><audio src="${audio}" controls></audio></p>
+        <p class='name'><strong>Song:</strong> ${name}</p>
+        <p class='album'><strong>Album:</strong> ${album}</p>
+        <p class='duration'><strong>Duration:</strong> ${duration.minutes}:${duration.seconds}</p>
+        <p class='singer'><strong>Singer:</strong> ${artists}</p>
+        <p class='music'><strong>Music By:</strong> ${music}</p>
+        <p class='totalplays'><strong>Total Plays:</strong> ${totalplays}</p>
+        <p class='release_date'><strong>Release Date:</strong> ${releaseDate}</p>`;
+
+        // Add Lyrics button
         const button = document.createElement('button');
         button.textContent = "Lyrics";
         button.className = "lyrics-btn";
         details.appendChild(button);
 
-        result.insertAdjacentElement('beforeend', details);
-
-        // add event listener to the individual button
+        // Add event listener to the individual button
         button.addEventListener('click', () => {
             if (!details.querySelector('.lyrics')) {
                 const outerBox = document.createElement('div');
@@ -65,9 +76,9 @@ let handledata = (data)=>{
             }
         });
 
+        resultContainer.appendChild(details);
     });
 }
-
 
 async function fetching(api) {
     console.log("Fetching API");

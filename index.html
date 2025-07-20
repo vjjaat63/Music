@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
+    <header>
+        <h1>Music Search</h1>
         <div class="top">
             <div class="left">
-                <input type="text" id="input" placeholder="enter song name">
-                <button id="search"> Search</button>
+                <input type="text" id="input" placeholder="Enter song name">
+                <button id="search">Search</button>
             </div>
             <div class="right">
-                <img src="./dark-mode.png" id="dm">
+                <button id="toggle-theme" title="Toggle dark mode">
+                    <img src="./dark-mode.png" id="dm" alt="Toggle dark mode">
+                </button>
             </div>
         </div>
-    </div>
+    </header>
+    <main>
+        <div id="result"></div>
+    </main>
+    <footer>
+        <p>Powered by Saavn API &copy; 2025</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

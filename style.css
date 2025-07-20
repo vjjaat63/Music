@@ -3,24 +3,73 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 :root {
-    --bg: white;
-    --col: black;
-    --top: pink;
-    --shadow: 0 8px 16px black;
+    --bg: #fafafa;
+    --col: #181818;
+    --top: #ffb6c1;
+    --shadow: 0 4px 16px rgba(0,0,0,0.1);
+    --card-bg: #fff;
+    --footer-bg: #f1f1f1;
+}
+
+body.dark {
+    --bg: #181818;
+    --col: #fafafa;
+    --top: #22223b;
+    --shadow: 0 4px 16px rgba(0,0,0,0.5);
+    --card-bg: #23223a;
+    --footer-bg: #181818;
 }
 
 body {
     background-color: var(--bg);
     color: var(--col);
-}
-
-#container {
-    min-width: 100vh; /* From second block */
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
     display: flex;
     flex-direction: column;
+}
+
+header {
+    background: var(--top);
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    border-radius: 0 0 15px 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.left {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1 1 300px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
 }
 
 .top {
@@ -36,14 +85,56 @@ body {
     max-width: 100vw; /* Preserved from first block (not colliding) */
 }
 
-input,
+input[type="text"] {
+    border-radius: 7px;
+    padding: 8px 12px;
+    margin: 0;
+    color: var(--col);
+    background-color: var(--card-bg);
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    transition: border 0.2s;
+}
+input[type="text"]:focus {
+    border: 1.5px solid var(--top);
+}
+
 button {
     border-radius: 7px;
+    padding: 8px 18px;
+    margin: 0;
+    color: var(--bg);
+    background-color: #00d1d1;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+button:hover {
+    background-color: #00b6b6;
+    transform: translateY(-2px) scale(1.05);
+}
+button:active {
+    background-color: #008e8e;
+}
+#toggle-theme {
+    background: none;
     padding: 4px;
-    margin: 4px;
-    color: var(--col);
-    background-color: var(--bg);
-    border: 1px solid white;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+}
+#toggle-theme img {
+    height: 30px;
+    filter: invert(0.2);
+    transition: filter 0.3s;
+}
+body.dark #toggle-theme img {
+    filter: invert(1);
 }
 
 button {
@@ -61,12 +152,24 @@ button:active {
     background-color: rgb(0, 157, 255);
 }
 
+main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 #result {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 2rem 0.5rem 1rem 0.5rem;
     justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 40vh;
 }
 
 #dm {
@@ -75,13 +178,21 @@ button:active {
 }
 
 .song {
-    width: 300px; /* From second block */
-    border-radius: 16px;
+    width: 320px;
+    border-radius: 18px;
     box-shadow: var(--shadow);
+    background: var(--card-bg);
     overflow: hidden;
-    padding: 1rem;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 20px;
+    padding: 1.25rem 1rem 1.5rem 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.song:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    transform: scale(1.04) translateY(-2px);
 }
 
 .song:hover {
@@ -90,15 +201,18 @@ button:active {
 }
 
 .image {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
+    width: 95%;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .song p {
-    margin: 0.3rem 0;
-    font-size: 0.9rem;
+    margin: 0.35rem 0;
+    font-size: 1rem;
     color: var(--col);
+    text-align: left;
+    width: 100%;
 }
 .audio{
     box-sizing: border-box;
@@ -127,4 +241,36 @@ button:active {
 .outer_box {
     border-top: 2px solid var(--col);
     overflow: hidden;
+}
+
+footer {
+    background: var(--footer-bg);
+    color: var(--col);
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-top: 1px solid #eee;
+    margin-top: 2rem;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+}
+
+@media (max-width: 700px) {
+    .song {
+        width: 98vw;
+        min-width: 210px;
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+    .top, .left {
+        flex-direction: column;
+        width: 100%;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+    #result {
+        gap: 1rem;
+        padding: 1rem 0.2rem 1rem 0.2rem;
+    }
 }
