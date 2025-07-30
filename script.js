@@ -60,6 +60,24 @@ let handledata = (data) => {
         <p class='totalplays'><strong>Total Plays:</strong> ${totalplays}</p>
         <p class='release_date'><strong>Release Date:</strong> ${releaseDate}</p>`;
 
+        // Add a Download button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.textContent = 'Download';
+        downloadBtn.onclick = async () => {
+            const response = await fetch(audio);
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            // Set filename to the real song name (sanitize for file systems)
+            a.download = `${name.replace(/[\\/:*?"<>|]/g, '')}-${artists.replace(/[\\/:*?"<>|]/g, '')}.m4a`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
+        details.appendChild(downloadBtn);
+
         // Add Lyrics button
         const button = document.createElement('button');
         button.textContent = "Lyrics";

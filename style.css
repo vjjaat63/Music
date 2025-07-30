@@ -104,7 +104,7 @@ input[type="text"]:focus {
 button {
     border-radius: 7px;
     padding: 8px 18px;
-    margin: 0;
+    margin: 5px;
     color: var(--bg);
     background-color: #00d1d1;
     border: none;
