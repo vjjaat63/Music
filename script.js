@@ -70,7 +70,7 @@ let handledata = (data) => {
             const a = document.createElement('a');
             a.href = url;
             // Set filename to the real song name (sanitize for file systems)
-            a.download = `${name.replace(/[\\/:*?"<>|]/g, '')}-${artists.replace(/[\\/:*?"<>|]/g, '')}.m4a`;
+            a.download = `${name.replace(/[\\/:*?"<>|]/g, '')}.mp3`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -83,23 +83,6 @@ let handledata = (data) => {
         button.textContent = "Lyrics";
         button.className = "lyrics-btn";
         details.appendChild(button);
-
-        // Add Download button
-        const downloadBtn = document.createElement('button');
-        downloadBtn.textContent = "Download";
-        downloadBtn.className = "download-btn";
-        details.appendChild(downloadBtn);
-
-        // Download logic
-        downloadBtn.addEventListener('click', () => {
-            const fileName = `${name} - ${artists}`.replace(/[^a-z0-9\s\-\.]/gi, '_') + '.mp3';
-            const a = document.createElement('a');
-            a.href = audio;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        });
 
         // Add event listener to the individual button
         button.addEventListener('click', () => {
