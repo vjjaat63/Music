@@ -70,7 +70,7 @@ let handledata = (data) => {
             const a = document.createElement('a');
             a.href = url;
             // Set filename to the real song name (sanitize for file systems)
-            a.download = `${name.replace(/[\\/:*?"<>|]/g, '')}.mp3`;
+            a.download = `${name.replace(/[\\/:*?"<>|]/g, '')}.m4a`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
