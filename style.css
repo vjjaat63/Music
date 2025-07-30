@@ -138,6 +138,7 @@ body.dark #toggle-theme img {
 }
 
 button {
+    margin: 5px;
     background-color: aqua;
     color: var(--bg); /* From second block */
     cursor: pointer;
