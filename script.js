@@ -84,6 +84,23 @@ let handledata = (data) => {
         button.className = "lyrics-btn";
         details.appendChild(button);
 
+        // Add Download button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.textContent = "Download";
+        downloadBtn.className = "download-btn";
+        details.appendChild(downloadBtn);
+
+        // Download logic
+        downloadBtn.addEventListener('click', () => {
+            const fileName = `${name} - ${artists}`.replace(/[^a-z0-9\s\-\.]/gi, '_') + '.mp3';
+            const a = document.createElement('a');
+            a.href = audio;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
         // Add event listener to the individual button
         button.addEventListener('click', () => {
             if (!details.querySelector('.lyrics')) {
